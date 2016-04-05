@@ -323,7 +323,6 @@ if (process.env.HMR) {
   // also have to change publicPath to http://localhost:8080 when in HMR mode 
   // in order to allow file-loader to resolve correctly
   server.output.publicPath = HMR_URL + server.output.publicPath;
-  console.log('output is', server.output);
   module.exports = server;
 } else {
   module.exports = [client, server];
