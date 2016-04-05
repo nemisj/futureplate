@@ -4,7 +4,7 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config.js');
-
+const HMR_URL = process.env.HMR_URL || 'http://localhost:8080';
 
 console.warn(`
   WARNING!
@@ -20,7 +20,6 @@ console.warn(`
 `);
 
 
-const HMR_URL = 'http://localhost:8080';
 
 let clientConfig = config[0];
 
