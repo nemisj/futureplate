@@ -103,6 +103,10 @@ Runs the `start:dev` script with HMR flag which tells the server to retrieve the
 
 Compiles the client bundle with hot module replacement (BABEL_ENV=hmr tells it to use hot module replacement via .babelrc and in the webpack config) and serves it on port 8080 via webpack-dev-server.
 
+### Simple run
+
+`npm run dev`
+
 
 ## Core Technologies
 
