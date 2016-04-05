@@ -25,7 +25,7 @@ export default createClass({
           <meta name='description' content='' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-          { HMR ? <link rel='stylesheet' type='text/css' href={`${base}/static/main.css`} /> : null }
+          { !HMR ? <link rel='stylesheet' type='text/css' href={`${base}/static/main.css`} /> : null }
         </head>
 
         <body>
