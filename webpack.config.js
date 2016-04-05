@@ -65,9 +65,9 @@ const CSS_MODULES = `?modules&localIdentName=${CSS_MODULES_CLASS_PATTERN}&import
 
 // Loaders for CSS Modules.
 const CSS_MODULES_LOADERS = {
-  CLASSNAMES_ONLY: `css-loader/locals${CSS_MODULES}`,
-  STYLETAGS: `style-loader!css-loader${CSS_MODULES}`,
-  FILE: ExtractTextPlugin.extract('style-loader', `css-loader${CSS_MODULES}`),
+  CLASSNAMES_ONLY: `css-loader/locals${CSS_MODULES}!sass-loader`,
+  STYLETAGS: `style-loader!css-loader${CSS_MODULES}!sass-loader`,
+  FILE: ExtractTextPlugin.extract('style-loader', `css-loader${CSS_MODULES}`, 'sass-loader'),
 };
 
 
@@ -145,7 +145,7 @@ const client = {
 
       // CSS Modules.
       {
-        test: /\.css$/,
+        test: /\.(css|sass)$/,
         exclude: [
           /node_modules/,
           /\.global\.css$/,
@@ -271,7 +271,7 @@ const server = {
 
       // CSS Modules.
       {
-        test: /\.css$/,
+        test: /\.(css|sass)$/,
         exclude: [
           /node_modules/,
           /\.global\.css$/,

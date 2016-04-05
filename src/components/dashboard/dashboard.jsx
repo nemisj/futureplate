@@ -1,4 +1,5 @@
 import styles from './dashboard.css';
+import sassStyles from './dashboard.sass';
 import icon from './dashboard.svg';
 
 import React from 'react';

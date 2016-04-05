@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 export default class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className={styles.container}>
         <div className="nav">
           Hi world!
           <Link to="/about">About</Link>
