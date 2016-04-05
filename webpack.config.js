@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const postcssImport = require('postcss-import');
 const autoprefixer = require('autoprefixer');
 
+const HMR_URL = process.env.HMR_URL || 'http://localhost:8080';
 
 /**
  * Run `webpack` with NODE_ENV=development to do a dev build.
@@ -167,6 +168,12 @@ const client = {
         loader: DEVELOPMENT ? CSS_LOADERS.STYLETAGS :
             CSS_LOADERS.FILE,
       },
+
+      // Images
+      { 
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|otf|woff)$/, 
+        loader: 'file-loader' 
+      }
     ],
   },
 
@@ -245,6 +252,7 @@ const server = {
     path: `${OUTPUT_DIR}/server`,
     filename: 'index.js',
     libraryTarget: 'commonjs2',
+    publicPath: '/static/',
   },
 
   // Node variables:
@@ -283,6 +291,12 @@ const server = {
         test: /\.global\.css$/,
         loader: 'null-loader',
       },
+
+      // Images
+      { 
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|otf|woff)$/, 
+        loader: 'file-loader' 
+      }
     ]
   },
 
@@ -305,6 +319,13 @@ const server = {
 
 // NOTE(dbow): When using Hot Module Replacement, the client bundle is served
 // by the webpack dev server so we only return the server bundle.
-
-module.exports = process.env.HMR ? server : [client, server];
+if (process.env.HMR) {
+  // also have to change publicPath to http://localhost:8080 when in HMR mode 
+  // in order to allow file-loader to resolve correctly
+  server.output.publicPath = HMR_URL + server.output.publicPath;
+  console.log('output is', server.output);
+  module.exports = server;
+} else {
+  module.exports = [client, server];
+}
 

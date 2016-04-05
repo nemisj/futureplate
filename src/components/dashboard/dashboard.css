@@ -1,3 +1,11 @@
 .container {
   composes: blue-text from 'src/styles/common.css';
 }
+
+.icon {
+  width: 200px;
+  height: 200px;
+  background-image: url('./dashboard.svg');
+  background-repeat: no-repeat;
+  background-size: 90%;
+}

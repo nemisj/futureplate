@@ -5,20 +5,15 @@
   "engine": "node 4.2.1",
   "scripts": {
     "clean": "rimraf build",
-
     "prebuild": "npm run clean",
     "prebuild:dev": "npm run clean",
-
     "build": "webpack",
     "start": "node build/server/index.js",
-
     "build:dev": "NODE_ENV=development webpack -w",
     "start:dev": "NODE_ENV=development node_modules/nodemon/bin/nodemon.js build/server/index.js",
-
     "build:hot": "HMR=true npm run build:dev",
     "start:hot": "HMR=true npm run start:dev",
     "hot": "NODE_ENV=development BABEL_ENV=hmr node webpack-dev-server.js",
-
     "dev": "concurrently -p command \"npm run hot\" \"npm run build:hot\" \"npm run start:hot\""
   },
   "license": "MIT",
@@ -57,6 +52,7 @@
     "css-loader": "^0.23.1",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
     "lodash": "^3.10.1",
     "null-loader": "^0.1.1",
     "postcss-import": "^8.0.2",
