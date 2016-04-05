@@ -2,11 +2,11 @@ import React from 'react';
 
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
-import serialize from 'serialize-javascript';
 import routes from './routes';
 import IndexStore from './stores/index';
 import { getDependencies } from './utils/index';
 import { FluxContext } from './utils/wrappers';
+import HTML from './components/html.jsx';
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development';
 const HOT_MODULE_REPLACEMENT = DEVELOPMENT && process.env.HMR;
@@ -32,13 +32,14 @@ export default (req, res, next) => {
               <RouterContext {...renderProps} />
             </FluxContext>
           ));
-          const data = serialize(store.serialize());
-          res.render('index', {
-            content,
-            data,
-            development: DEVELOPMENT,
-            base: HOT_MODULE_REPLACEMENT ? 'http://localhost:8080' : '',
-          });
+          const data = store.serialize();
+          const html = renderToString(
+            <HTML content={content} 
+              data={data}
+              base={HOT_MODULE_REPLACEMENT ? 'http://localhost:8080' : ''} />
+          );
+
+          res.send('<!DOCTYPE html>' + html);
         })
         .catch((error) => {
           console.log(error);

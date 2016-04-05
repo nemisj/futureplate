@@ -12,9 +12,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.set('port', PORT);
 
-app.set('views', 'src/views');
-app.set('view engine', 'jade');
-
 app.use(favicon(__dirname + '/images/favicon.ico'));
 app.use('/images', express.static(__dirname + '/images'));
 
