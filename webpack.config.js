@@ -67,7 +67,7 @@ const CSS_MODULES = `?modules&localIdentName=${CSS_MODULES_CLASS_PATTERN}&import
 const CSS_MODULES_LOADERS = {
   CLASSNAMES_ONLY: `css-loader/locals${CSS_MODULES}!sass-loader`,
   STYLETAGS: `style-loader!css-loader${CSS_MODULES}!sass-loader`,
-  FILE: ExtractTextPlugin.extract('style-loader', `css-loader${CSS_MODULES}`, 'sass-loader'),
+  FILE: ExtractTextPlugin.extract('style-loader', `css-loader${CSS_MODULES}!sass-loader`),
 };
 
 
