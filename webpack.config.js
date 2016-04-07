@@ -240,9 +240,36 @@ const server = {
 
   target: 'node',
 
+  // break on first error, so that we can valiade the bundle
+  bail: !!process.env.BAIL,
+
   // Only bundle the source code. All other imports are treated as externals.
   // https://webpack.github.io/docs/configuration.html#externals
-  externals: /^[a-z\-0-9]+$/,
+  // externals: /^[a-z\-0-9]+$/,
+  externals(context, request, cb) {
+    if (/^\./.test(request)) {
+      // it's relative path
+      return cb();
+    }
+
+    var fullPath;
+    try {
+      fullPath = require.resolve(request);
+    } catch (e) {
+      if (process.env.BAIL) {
+        throw e;
+      }
+
+      return cb(null, request);
+    }
+
+    if (/\bnode_modules\b/.test(fullPath)) {
+      // it's an external inside node_modules
+      return cb(null, request);
+    }
+
+    return cb();
+  },
 
   resolve: {
     root: RESOLVE_DIR,

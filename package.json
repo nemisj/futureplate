@@ -7,7 +7,7 @@
     "clean": "rimraf build",
     "prebuild": "npm run clean",
     "prebuild:dev": "npm run clean",
-    "build": "webpack",
+    "build": "BAIL=true webpack",
     "start": "node build/server/index.js",
     "build:dev": "NODE_ENV=development webpack -w",
     "start:dev": "NODE_ENV=development node_modules/nodemon/bin/nodemon.js build/server/index.js",
